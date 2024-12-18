@@ -16,8 +16,8 @@ P.A.C.T. stands for Packer Ansible CloudInit Templates, for Proxmox! P.A.C.T. cr
 
 ## Repository Structure
 
-- **.Gitea/**
-  - **Workflows/**: Contains Gitea workflow files for automating the build and deployment process. You can modify these for your Runners but no modifications should be required by default. I recommend running this with a Docker Runner and not a Host Runner.
+- **.Github/**
+  - **workflows/**: Contains Git workflow files for automating the build and deployment process. You can modify these for your Runners but no modifications should be required by default. I recommend running this with a Docker Runner and not a Host Runner.
 
 - **Scripts/**
   - **build.sh**: Main script to orchestrate the build and deployment process.
