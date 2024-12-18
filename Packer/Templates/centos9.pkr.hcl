@@ -1,5 +1,5 @@
 #---
-# Packer Template to create an Centos8 Server Image on Proxmox from a cloned Template  
+# Packer Template to create an Centos9 Server Image on Proxmox from a cloned Template  
 
 packer {
   required_plugins {
@@ -48,7 +48,7 @@ locals {
 
 
 # Resource Definiation for the VM Template
-source "proxmox-clone" "CentOS8" {
+source "proxmox-clone" "CentOS9" {
 
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -60,9 +60,9 @@ source "proxmox-clone" "CentOS8" {
     # VM General Settings
     node = "${var.proxmox_host_node}"
     vm_id = "${var.vmid}"
-    vm_name   = "PACT-CentOS-8"
+    vm_name   = "PACT-CentOS-9"
     template_description = "An Image Customized by Packer. Build Date: ${local.build_time}"
-    clone_vm = "Template-CentOS-8"
+    clone_vm = "Template-CentOS-9"
     ssh_username = "root"
     qemu_agent = true
 
@@ -90,8 +90,8 @@ source "proxmox-clone" "CentOS8" {
 # Build Definition to create the VM Template
 build {
 
-    name = "CentOS-8-Packer"
-    sources = ["proxmox-clone.CentOS8"]
+    name = "CentOS-9-Packer"
+    sources = ["proxmox-clone.CentOS9"]
 
     # Generalizing the Image
     provisioner "shell" {
@@ -110,7 +110,7 @@ build {
     }
    
     provisioner "ansible" {
-         playbook_file = "./Ansible/Playbooks/centos8.yml"
+         playbook_file = "./Ansible/Playbooks/centos9.yml"
          use_proxy = false
          extra_arguments = ["-e", "@./Ansible/Variables/vars.yml"]
     }
