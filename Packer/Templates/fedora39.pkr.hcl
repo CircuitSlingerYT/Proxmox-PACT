@@ -94,11 +94,25 @@ build {
     name = "Fedora39-Packer"
     sources = ["proxmox-clone.Fedora39"]
 
-    # Generalizing the Image
+    # Waiting on CloudInit
     provisioner "shell" {
         inline = [
             "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do sleep 1; done",
             "sudo dnf update -y",
+            "export ANSIBLE_HOST_KEY_CHECKING=False", 
+            "export ANSIBLE_REMOTE_TEMP=/tmp/.ansible"
+        ]
+    }
+
+    provisioner "ansible" {
+         playbook_file = "./Ansible/Playbooks/fedora39.yml"
+         use_proxy = false
+         extra_arguments = ["-e", "@./Ansible/Variables/vars.yml"]
+    }
+
+    # Generalizing the Image
+    provisioner "shell" {
+        inline = [
             "sudo rm /etc/ssh/ssh_host_*",
             "sudo truncate -s 0 /etc/machine-id",
             "sudo dnf autoremove -y",
@@ -111,11 +125,4 @@ build {
         ]
     }
    
-    provisioner "ansible" {
-         playbook_file = "./Ansible/Playbooks/fedora39.yml"
-         use_proxy = false
-         extra_arguments = ["-e", "@./Ansible/Variables/vars.yml"]
-    }
-
-
 }
