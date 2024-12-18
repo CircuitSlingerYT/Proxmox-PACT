@@ -30,7 +30,7 @@
   - name: Add "{{ VM_USERNAME }}" users to sudo group
     user:
         name: "{{ VM_USERNAME }}"
-        groups: sudo
+        groups: wheel
         append: yes
         state: present
   
