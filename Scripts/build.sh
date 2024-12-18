@@ -49,7 +49,7 @@ start_packer() {
 
     # Rocky Linux 9
     if [ "$Download_ROCKY_LINUX_9" == "Y" ]; then
-        packer_build rocky9.pkr.hcl $((nVMID + 132))
+        packer_build rocky9.pkr.hcl $((nVMID + 131))
     fi
 
 }
