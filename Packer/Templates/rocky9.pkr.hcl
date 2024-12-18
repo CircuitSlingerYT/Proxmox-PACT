@@ -97,21 +97,37 @@ build {
     name = "Rocky9"
     sources = ["proxmox-clone.Rocky9"]
 
-    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
+    # Waiting on CloudInit
     provisioner "shell" {
         inline = [
             "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do sleep 1; done",
             "sudo dnf update -y",
+            "export ANSIBLE_HOST_KEY_CHECKING=False", 
+            "export ANSIBLE_REMOTE_TEMP=/tmp/.ansible"
+        ]
+    }
+
+    provisioner "ansible" {
+         playbook_file = "./Ansible/Playbooks/fedora39.yml"
+         use_proxy = false
+         extra_arguments = ["-e", "@./Ansible/Variables/vars.yml"]
+    }
+
+    # Generalizing the Image
+    provisioner "shell" {
+        inline = [
             "sudo rm /etc/ssh/ssh_host_*",
             "sudo truncate -s 0 /etc/machine-id",
-            "sudo dnf -y autoremove",
+            "sudo dnf autoremove -y",
             "sudo dnf clean all",
             "sudo cloud-init clean",
             "sudo rm -f /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg",
+            "sudo rm -f /etc/NetworkManager/system-connections/*",
             "sudo sync",
             "sudo rm -rf /var/log/* /home/*/.bash_history"
         ]
     }
+   
    
     provisioner "ansible" {
          playbook_file = "./Ansible/Playbooks/rocky9.yml"
