@@ -116,7 +116,6 @@ Coming Soon...
 - More sample playbook actions
 - Include instruction for creating Packer credentials
 - Create a video on using and customizing the repo
-- Update references to Gitea to Github
 - Create more elegant ways to get Private Keys and SSH Passwords for Proxmox into the script
 - Add a way for user passwords to be sent into the Ansible Playbooks. Could be done with Packer but the goal was always for VM customizations to be done via ansible and I don't want to have to pass the 'password' environment variable through packer as if the user doesn't call it that could be an issue.
 
