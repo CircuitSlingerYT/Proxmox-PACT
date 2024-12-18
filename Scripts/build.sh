@@ -81,7 +81,7 @@ fi
 #####################################################################################
 
 # Define the packages to install
-PACKAGES="gnupg2 ansible software-properties-common lsb-release sshpass unzip wget node.js"
+PACKAGES="gnupg2 ansible software-properties-common lsb-release sshpass unzip wget node.js git"
 
 # Install packages based on distribution
 case "$OS" in
@@ -126,10 +126,10 @@ fi
 if [ "$CUSTOM_ANSIBLE_REPO" != "N" ]; then
     echo "CUSTOM_ANSIBLE_REPO is set. Preparing to update playbooks."
     # Delete all contents of ./Ansible/Playbooks/
-    rm -rf ./Ansible/Playbooks/*
+    rm -rf ./Ansible
     # Download the contents of the specified repository into ./Ansible/Playbooks/
     echo "Downloading contents from $CUSTOM_ANSIBLE_REPO"
-    git clone "$CUSTOM_ANSIBLE_REPO" ./Ansible/Playbooks/
+    git clone "$CUSTOM_ANSIBLE_REPO" ./Ansible
     echo "Playbooks updated successfully."
 fi
 
@@ -137,10 +137,10 @@ fi
 if [ "$CUSTOM_PACKER_REPO" != "N" ]; then
     echo "CUSTOM_PACKER_REPO is set. Preparing to update Packer templates."
     # Delete all contents of ./Packer/Templates/
-    rm -rf ./Packer/Templates/*
+    rm -rf ./Packer
     # Download the contents of the specified repository into ./Packer/Templates/
     echo "Downloading contents from $CUSTOM_PACKER_REPO"
-    git clone "$CUSTOM_PACKER_REPO" ./Packer/Templates/
+    git clone "$CUSTOM_PACKER_REPO" ./Packer
     echo "Packer templates updated successfully."
 fi
 
