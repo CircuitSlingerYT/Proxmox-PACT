@@ -38,7 +38,7 @@ P.A.C.T. stands for Packer Ansible CloudInit Templates, for Proxmox! P.A.C.T. cr
 1. Make sure that you have a user account for Packer to use in Proxmox VE
 2. Generate an API Token for that Proxmox User
 3. Fill in your variables in the Options.ini file. Set the customizations as needed.
-4. Create environment variable secrets, a secretfile or use Gitea Runner Secrets for the 2 Secret values needed (Proxmox API Token Secret and either SSH Password or Private Key for Proxmox)
+4. Create environment variable secrets, a secretfile or use Git Runner Secrets for the 2 Secret values needed (Proxmox API Token Secret and either SSH Password or Private Key for Proxmox)
 
 ## Usage
 1. Make Changes to the Options file to setup the script to download the images that you want to download and configure.
@@ -76,9 +76,9 @@ P.A.C.T. stands for Packer Ansible CloudInit Templates, for Proxmox! P.A.C.T. cr
     The Storage Pool that you want the Templates and VM disks stored on. For example local-lvm.
 
 
-2. Decide between running manually or running via a Gitea Runner. Note: Running manually cannot be done from the Proxmox host without making major changes to the script since the script will use SSH to connect to the Proxmox instance.
+2. Decide between running manually or running via a Git Runner. Note: Running manually cannot be done from the Proxmox host without making major changes to the script since the script will use SSH to connect to the Proxmox instance.
 
-3. Running Manually - Skip to Step 4 if using Gitea Runner
+3. Running Manually - Skip to Step 4 if using Git Runner
 
     i. Download the repo to the machine you intend to run the build from.
 
@@ -95,18 +95,18 @@ P.A.C.T. stands for Packer Ansible CloudInit Templates, for Proxmox! P.A.C.T. cr
         sudo chmod +x ./Scripts/build.sh
         sudo ./Scripts/build.sh
         
-4. Running with Gitea
+4. Running with Git
 
-    i. Set up your Gitea workflows in `.Gitea/Workflows/` to trigger the build and deployment process.
+    i. Set up your Git workflows in `.github/workflows/` to trigger the build and deployment process.
 
-    ii. Ensure you have an `act` runner with the `Proxmox` label. The necessary packages for Packer and Ansible will be installed automatically. For more information on setting up the Gitea Act Runner, refer to the [Gitea Act Runner documentation](https://docs.gitea.io/en-us/act_runner/).
+    ii. Ensure you have a runner with the `Proxmox` label. The necessary packages for Packer and Ansible will be installed automatically.
 
-    iii. Make sure to set your secrets in Gitea Actions, or create another way for these environment variables to be set:
+    iii. Make sure to set your secrets in Git Actions, or create another way for these environment variables to be set:
       - $PROXMOX_API_TOKEN_SECRET
       - $PROXMOX_SSH_PASSWORD
       - $PROXMOX_PRIVATE_KEY
     
-    iv. Commit and push your changes to the repository. Gitea will automatically detect the workflow and run the scripts.
+    iv. Commit and push your changes to the repository. Git will automatically detect the workflow and run the scripts.
 
 ## Roadmap
 
