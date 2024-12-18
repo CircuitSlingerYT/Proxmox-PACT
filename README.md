@@ -111,12 +111,9 @@ P.A.C.T. stands for Packer Ansible CloudInit Templates, for Proxmox! P.A.C.T. cr
 ## Roadmap
 
 Coming Soon...
-- Add CentOS Support
-- Fix Custom Repositories for Ansible and Packer playbooks. (Currently the variables files must still point to existing files, they wont be downloaded).
 - More sample playbook actions
 - Include instruction for creating Packer credentials
 - Create a video on using and customizing the repo
-- Create more elegant ways to get Private Keys and SSH Passwords for Proxmox into the script
 - Add a way for user passwords to be sent into the Ansible Playbooks. Could be done with Packer but the goal was always for VM customizations to be done via ansible and I don't want to have to pass the 'password' environment variable through packer as if the user doesn't call it that could be an issue.
 
 ## Supported Distros
@@ -129,6 +126,7 @@ Coming Soon...
 - Fedora 39
 - Fedora 40
 - Rocky Linux 9
+- CentOS 9
 
 ## Links
 
