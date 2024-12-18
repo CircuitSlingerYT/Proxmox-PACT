@@ -8,5 +8,6 @@ qm destroy $((nVMID + 12))
 qm destroy $((nVMID + 21))
 qm destroy $((nVMID + 22))
 qm destroy $((nVMID + 31))
+qm destroy $((nVMID + 41))
 
 rm -r ./workingdir
