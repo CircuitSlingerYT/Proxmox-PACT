@@ -71,10 +71,11 @@ fi
 
 # Fedora 39
 if [ "$Download_FEDORA_39" == "Y" ]; then
+    qm destroy $((nVMID + 121))
+    qm destroy $((nVMID + 21))    
+    
     echo "Creating base Fedora 39 Template"
     create_template $((nVMID + 21)) "Template-Fedora-39" "fedora-39-template.qcow2" "https://fedora.mirror.constant.com/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-39-1.5.x86_64.qcow2"
-    qm destroy $((nVMID + 121))
-    qm destroy $((nVMID + 21))
 fi
 
 # Fedora 40
